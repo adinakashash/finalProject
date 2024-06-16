@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import axios from "axios";
-import user from "@/classes/user";
+import User from "@/classes/user";
+
 
 const http = 'http://localhost:3000';//process.env.REACT_APP_HTTP;
 const businessId = 1; //from auth
-// const res = await axios.get(`${http}/user?=${businessId}`);
+// const res = await axios.get(`${http}/user?=${businessId}`);//error
 const { data = {} } = [];
 
 const userSlice = createSlice({
@@ -15,12 +16,14 @@ const userSlice = createSlice({
 })
 
 export const { } = userSlice.actions;
-export const selectUser= (state: RootState) => state.userSlice.user
+export const selectUser = (state: RootState) => state.userSlice.user;
 export default userSlice.reducer;
 
-export const createUser = createAsyncThunk('', async (_user: user) => {
+export const createUser = createAsyncThunk('', async (_user: User) => {
     try {
-        const response = await axios.post(`${http}/users`, _user)
+        console.log(_user);
+        
+        const response = await axios.post(`${http}/user/signup`, _user)
         return response.data
     } catch (error) {
         return error

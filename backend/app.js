@@ -5,10 +5,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/Users');
 const bodyParser = require('body-parser');
-
+const cors =require('cors')
 const app = express();
+
+app.use(cors())
 app.use(bodyParser.json());
-app.use('/users', userRouter);
+app.use('/user', userRouter);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL || 'mongodb://localhost:27017';
